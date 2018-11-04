@@ -25,7 +25,7 @@ router.get('/', async (req, res) =>{
 
 router.get('/:messageId', async (req, res)=>{
 	try{
-		const singleMessage = awai Message.findById(req.params.messageId);
+		const singleMessage = await Message.findById(req.params.messageId);
 		return res.send({singleMessage});
 	}
 	catch(err){
