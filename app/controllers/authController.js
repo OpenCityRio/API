@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 router.post('/register', async (req, res)=>{
-    const {email} = req.body;
+    const {cpf} = req.body;
 
     try{
-        if(await User.findOne({email}))
+        if(await User.findOne({cpf}))
             return res.status(400).send({error: 'User already exists'});
 
         const user = await User.create(req.body);
@@ -25,7 +25,7 @@ router.post('/register', async (req, res)=>{
 router.post('/authenticate', async (req, res)=>{
     const{email, password} = req.body;
 
-    const user = await User.findOne({email}).select('+password');
+    const user = await User.findOne({cpf}).select('+password');
 
     if(!user)
         res.status(400).send({error: 'User not found'});
